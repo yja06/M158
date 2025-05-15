@@ -6,6 +6,10 @@ Hier ist mein Plan für dieses Projekt über die neun Wochen. Dieser zeigt alle 
 
 ## 📊 Zeitplan
 
+# 📅 Projektplan – WordPress CMS Migration LB2 (9 Wochen)
+
+## Gantt-Diagramm
+
 ```mermaid
 gantt
     title WordPress CMS Migration – Projektplan Yenul LB2
@@ -19,14 +23,14 @@ gantt
 
     section Phase 2: Umgebung
     VM erstellen           :vm, 29.05.2025, 1d
-    Snapshot erstellen     :snap1, 29.05.2025, 1d
+    Snapshot erstellen 1   :snap1, 29.05.2025, 1d
     LAMP Setup             :lamp, 05.06.2025, 1d
     DNS einrichten         :dns, 06.06.2025, 1d
-    Snapshot erstellen     :snap2, 06.06.2025, 1d
+    Snapshot erstellen 2   :snap2, 06.06.2025, 1d
 
     section Phase 3: Zielsystem
     Dienste einrichten     :dienste, 12.06.2025, 1d
-    Snapshot erstellen     :snap3, 13.06.2025, 1d
+    Snapshot erstellen 3   :snap3, 13.06.2025, 1d
 
     section Phase 4: Migration
     DB migrieren           :mig, 19.06.2025, 2d
