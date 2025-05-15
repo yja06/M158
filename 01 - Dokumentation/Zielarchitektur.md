@@ -1,22 +1,23 @@
-# 🏗️ Zielarchitektur – WordPress CMS auf AWS
+## ☁️ Architekturdiagramm – Soll-Zustand (AWS mit Docker)
 
-## Beschreibung
-
-Die WordPress-Applikation wird in einer cloudbasierten Umgebung auf **AWS** betrieben. Die Architektur setzt sich aus folgenden Hauptkomponenten zusammen:
-
-- **EC2-Instanz für Webserver** (Apache, PHP, WordPress)
-- **EC2-Instanz oder gleiche Instanz für Datenbank** (MariaDB)
-- **DNS-Zuordnung** über z. B. Route53
-- Kommunikation über HTTP(S) zwischen Client und Webserver
-
-## 🔧 Systemübersicht
-
-## 🔧 Systemübersicht
-
-```mermaid
-graph TD
-    A[Client-Browser] --> B[Apache Webserver (EC2)]
-    B --> C[PHP verarbeitet Anfrage]
-    C --> D[MariaDB Datenbank (EC2)]
-    B --> E[WordPress Files (wp-content)]
-    D --> F[WordPress DB (wp_posts, wp_users, etc.)]
+Client-Browser
+      |
+      v
++------------------+
+| Route53 (DNS)    |
+| wordpress.yenul.ch |
++------------------+
+      |
+      v
++-----------------------------+
+|   EC2-Instance (Linux)      |
+|-----------------------------|
+| [NGINX Reverse Proxy]       |
+| [Docker: WordPress]         |
+| [Docker: MariaDB]           |
++-----------------------------+
+      |
+      v
++--------------------+
+|  S3 (Backups)      |
++--------------------+
