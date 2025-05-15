@@ -2,7 +2,7 @@
 
 ## Übersicht
 
-Hier siehst du den vollständigen Gantt-Plan über 9 Wochen. Dieser zeigt alle Phasen, inklusive Snapshots und Meilensteinen.
+Hier ist mein Plan für dieses Projekt über die neun Wochen. Dieser zeigt alle Phasen, inklusive Snapshots und Meilensteinen.
 
 ## 📊 Zeitplan
 
