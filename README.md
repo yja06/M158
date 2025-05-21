@@ -8,3 +8,7 @@
 Dies ist das Porfolio vom Modul 158 von Yenul Jayawardhana. In diesesm Portfolio sind ausschliesslich meine Kompetenznachweise, welche ich während dem Modul gemacht habe, gespeichert. Zusätzlich habe ich noch meine Dokumentationen zum Festhalten des Wissens und Vorbereitung auf die LB.
 
 ## Dokumentationen
+
+[Dokumentationen] https://github.com/yja06/M158/tree/main/01%20-%20Dokumentation
+[WordPress] https://github.com/yja06/M158/tree/main/02%20-%20WordPress
+[Diverses] https://github.com/yja06/M158/tree/main/Diverses
