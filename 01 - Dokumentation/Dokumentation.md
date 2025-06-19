@@ -1,108 +1,35 @@
-# WordPress Docker Setup (für EC2)
+## Phase 1 – Projektstart
 
-## ✨ Projektziel
+### Ziel des Projekts
 
-WordPress auf einer EC2-Instanz bereitstellen mit Docker Compose (Webserver + MariaDB)
+Migration einer bestehenden WordPress-Website (ohne Plugins) von einem Quellserver ([https://m158.geekz.ch/](https://m158.geekz.ch/)) auf eine eigene neue AWS-Infrastruktur mittels Docker.
 
+### Anforderungen
+
+* Kein Plugin-Import
+* Migration der Inhalte (Posts, Seiten, Medien)
+* Eigenes Setup mit EC2, Apache, PHP, MariaDB
+* Kein fertiges Image, alles manuell über Docker bzw. Shell
+* Schrittweise Umsetzung in 5 Phasen mit Screenshots
+
+### Projektumgebung
+
+* 3 EC2-Instanzen:
+
+  * Webserver (Apache + PHP + WordPress)
+  * Datenbank (MariaDB)
+  * PhpMyAdmin (Testing + Zugriff)
+* Verbindung via SSH mit SSH-Key `SSH.pem`
+* Manuelles Aufsetzen über Shell
+![image](https://github.com/user-attachments/assets/a03e95d6-0dc2-4426-8106-fa23e0964979)
+
+### Tools & Technologien
+
+* AWS EC2 (Ubuntu 22.04)
+* Apache2
+* PHP 8.1
+* MariaDB
+* WordPress (neuste Version)
+* PhpMyAdmin
+* SCP für Dateiübertragungen
 ---
-
-## ⚙ Architekturübersicht
-
-```
-[ EC2 Instance (Ubuntu) ]
-        |
-        |-- docker-compose.yml
-        |
-        |-- [web]    --> Apache + PHP + WordPress (Port 80)
-        |-- [db]     --> MariaDB (Port 3306)
-        |
-        '-- volumes  --> html/ & db_data/
-```
-
----
-
-## 📊 Verwendete Komponenten
-
-* **Docker Version:** 24.x
-* **Docker Compose:** 2.x
-* **MariaDB:** latest
-* **PHP Apache Image:** php:8.2-apache
-
----
-
-## 📦 docker-compose.yml
-
-```yaml
-version: '3.8'
-
-services:
-  web:
-    build: .
-    ports:
-      - "80:80"
-    depends_on:
-      - db
-    volumes:
-      - ./html:/var/www/html
-
-  db:
-    image: mariadb:latest
-    restart: always
-    environment:
-      MYSQL_ROOT_PASSWORD: rootpass
-      MYSQL_DATABASE: wordpress
-      MYSQL_USER: wpuser
-      MYSQL_PASSWORD: wppass
-    volumes:
-      - db_data:/var/lib/mysql
-
-volumes:
-  db_data:
-```
-
----
-
-## 🔧 Dockerfile
-
-```Dockerfile
-FROM php:8.2-apache
-
-RUN apt-get update && apt-get install -y \
-    libzip-dev libpng-dev libjpeg-dev libfreetype6-dev \
-    && docker-php-ext-configure gd --with-freetype --with-jpeg \
-    && docker-php-ext-install gd mysqli zip
-
-EXPOSE 80
-COPY ./html/ /var/www/html/
-```
-
----
-
-## 🚀 Startbefehle
-
-```bash
-docker-compose up --build -d
-```
-
----
-
-## 📲 Zugriff auf WordPress
-
-* **URL:** `http://<EC2-PUBLIC-IP>`
-* **Admin:** Benutzername & Passwort aus Setup
-
----
-
-## ✅ Optionale Erweiterungen
-
-* PhpMyAdmin als Container
-* HTTPS (Let's Encrypt oder self-signed)
-* GitHub CI/CD
-
----
-
-## 📑 Status
-
-* WordPress erfolgreich installiert und erreichbar
-* Datenbankverbindung aktiv
-* Admin-Login funktioniert ✅
