@@ -47,3 +47,39 @@ Dateien lokal auf dem Laptop gespeichert in einem Ordner M158
 Verzeichnis enthält z. B. wp-content, wp-config.php, index.php, wp_m158_db.sql usw.
 
 Export geprüft und auf Vollständigkeit kontrolliert
+
+---
+
+## 🛠️ Phase 3 – Import & Konfiguration
+
+In dieser Phase haben wir die alte WordPress-Seite auf die neue Zielumgebung übertragen und konfiguriert.
+
+### 🔄 Datenbank-Import
+
+* Die Datei `wp_m158_db.sql` wurde per `scp` auf die DB-Instanz übertragen.
+* Danach erfolgte der Import mit folgendem Befehl:
+
+  ```bash
+  mysql -u wpuser -p wp_m158 < /home/ubuntu/wp_m158_db.sql
+  ```
+* Der Import war erfolgreich.
+
+### 📁 WordPress-Dateien kopieren
+
+* Die alten WordPress-Dateien (HTML, PHP, wp-content usw.) wurden per FTP/SCP übertragen.
+* Dateien wurden nach `/var/www/html/` auf die Webserver-Instanz kopiert.
+
+### ⚙️ Konfiguration
+
+* `wp-config.php` wurde angepasst:
+
+  * Datenbankname: `wp_m158`
+  * Benutzer: `wpuser`
+  * Passwort: `wpuser-passwort`
+  * DB-Host: IP der Datenbank-Instanz
+
+### ✅ Ergebnis
+
+* Nach Abschluss war die Website unter der Public-IP des Webservers erreichbar.
+* Beispielanzeige: „Hello world!“ (Standard-Beitrag)
+
