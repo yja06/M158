@@ -136,3 +136,6 @@ Da kein öffentlicher DNS verfügbar war, wurde der DNS-Name lokal über die `ho
 <img width="944" alt="https geht" src="https://github.com/user-attachments/assets/6efbdd6c-34bc-4f7e-9392-83dcd9d991a3" />
 <img width="959" alt="dns funktioniert" src="https://github.com/user-attachments/assets/f035d8db-8945-4daf-ab07-5902a36a7f30" />
 
+Hostdatei abgeändert
+![image](https://github.com/user-attachments/assets/8fd453ab-175d-4e4b-aa8b-01448d6eecb3)
+
