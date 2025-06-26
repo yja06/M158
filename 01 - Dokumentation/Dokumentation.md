@@ -50,11 +50,11 @@ Export geprüft und auf Vollständigkeit kontrolliert
 
 ---
 
-## 🛠️ Phase 3 – Import & Konfiguration
+## Phase 3 – Import & Konfiguration
 
 In dieser Phase haben wir die alte WordPress-Seite auf die neue Zielumgebung übertragen und konfiguriert.
 
-### 🔄 Datenbank-Import
+### Datenbank-Import
 
 * Die Datei `wp_m158_db.sql` wurde per `scp` auf die DB-Instanz übertragen.
 * Danach erfolgte der Import mit folgendem Befehl:
@@ -64,12 +64,12 @@ In dieser Phase haben wir die alte WordPress-Seite auf die neue Zielumgebung üb
   ```
 * Der Import war erfolgreich.
 
-### 📁 WordPress-Dateien kopieren
+### WordPress-Dateien kopieren
 
 * Die alten WordPress-Dateien (HTML, PHP, wp-content usw.) wurden per FTP/SCP übertragen.
 * Dateien wurden nach `/var/www/html/` auf die Webserver-Instanz kopiert.
 
-### ⚙️ Konfiguration
+### Konfiguration
 
 * `wp-config.php` wurde angepasst:
 
@@ -78,8 +78,25 @@ In dieser Phase haben wir die alte WordPress-Seite auf die neue Zielumgebung üb
   * Passwort: `wpuser-passwort`
   * DB-Host: IP der Datenbank-Instanz
 
-### ✅ Ergebnis
+### Ergebnis
 
 * Nach Abschluss war die Website unter der Public-IP des Webservers erreichbar.
 * Beispielanzeige: „Hello world!“ (Standard-Beitrag)
 
+---
+
+## Phase 4: Inbetriebnahme & Testing
+
+In dieser Phase wurde die migrierte WordPress-Seite auf der neuen Zielumgebung getestet und in Betrieb genommen.
+
+### Schritte:
+
+- WordPress im Browser geöffnet (http://<webserver-ip>)
+- Admin-Login getestet mit Benutzer `wp_user`, Passwort `12344`
+- Verbindung zur Datenbank erfolgreich bestätigt
+- Inhalte (z. B. Beiträge, Seiten) auf korrekte Migration geprüft
+- Medieninhalte und Layout wurden auf Vollständigkeit überprüft
+
+### Ergebnis:
+
+Die WordPress-Seite funktioniert wie auf dem Quellsystem. Keine Fehler aufgetreten. Die Migration war erfolgreich.
