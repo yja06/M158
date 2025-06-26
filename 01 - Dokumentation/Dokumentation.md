@@ -4,42 +4,43 @@
 
 Migration einer bestehenden WordPress-Website (ohne Plugins) von einem Quellserver ([https://m158.geekz.ch/](https://m158.geekz.ch/)) auf eine eigene neue AWS-Infrastruktur mittels Docker.
 
-### Anforderungen
+**Vorgehen:**
 
-* Kein Plugin-Import
-* Migration der Inhalte (Posts, Seiten, Medien)
-* Eigenes Setup mit EC2, Apache, PHP, MariaDB
-* Kein fertiges Image, alles manuell über Docker bzw. Shell
-* Schrittweise Umsetzung in 5 Phasen mit Screenshots
+* Projekt in 5 Phasen aufgeteilt
+* GitHub-Repository erstellt
+* Bewertungsraster analysiert
+* Quellumgebung: WordPress ohne Plugins, FTP-Zugang
 
-### Projektumgebung
+---
 
-* 3 EC2-Instanzen:
+## Phase 2 – Architektur & Infrastruktur
 
-  * Webserver (Apache + PHP + WordPress)
-  * Datenbank (MariaDB)
-  * PhpMyAdmin (Testing + Zugriff)
-* Verbindung via SSH mit SSH-Key `SSH.pem`
-* Manuelles Aufsetzen über Shell
+### EC2-Instanzen:
+
+* **Webserver (wp-server)** – Apache, PHP-FPM, WordPress
+* **Datenbankserver (db-server)** – MariaDB
+* **Adminer (admin-server)** – zur DB-Verwaltung (optional)
 ![image](https://github.com/user-attachments/assets/a03e95d6-0dc2-4426-8106-fa23e0964979)
 
-### Tools & Technologien
+### Sicherheit:
 
-* AWS EC2 (Ubuntu 22.04)
-* Apache2
-* PHP 8.1
-* MariaDB
-* WordPress (neuste Version)
-* PhpMyAdmin
-* SCP für Dateiübertragungen
+* SSH-Key Zugriff
+* Security Groups: Port 22, 80, 443, 3306 gezielt freigegeben
 
 Sicherheitsgruppe:
 ![image](https://github.com/user-attachments/assets/f6efd238-e93c-41bb-9e4f-3f7072bcaa54)
 
----
-Phase 2: Backup & Export
+### Kommunikation:
 
-Mit FileZilla die WordPress-Dateien vom Quellserver heruntergeladen
+* wp-server ↔ db-server über private IP
+* Kein Public DB-Zugriff
+---
+## Phase 3 – Migration & Einrichtung
+
+### 1. Datenmigration:
+
+* Inhalte von `m158.geekz.ch` über Filezilla gesichert (Dateien & SQL-Dump)
+* `wp-content` übernommen
 
 <img width="585" alt="file zilla übertragung" src="https://github.com/user-attachments/assets/d57cdac9-4146-46b5-bb8f-5dd9c48bedf9" />
 
@@ -52,49 +53,92 @@ Verzeichnis enthält z. B. wp-content, wp-config.php, index.php, wp_m158_db.sq
 
 Export geprüft und auf Vollständigkeit kontrolliert
 
----
+### 2. Datenbank:
 
-## Phase 3 – Import & Konfiguration
+* MariaDB auf db-server installiert und gestartet
+* Datenbank `wp_m158` importiert:
 
-In dieser Phase haben wir die alte WordPress-Seite auf die neue Zielumgebung übertragen und konfiguriert.
+```bash
+mysql -u root -p < wp_m158.sql
+```
 
-### Datenbank-Import
+* Benutzer `wpuser` mit Remote-Rechten angelegt:
 
-* Die Datei `wp_m158_db.sql` wurde per `scp` auf die DB-Instanz übertragen.
-* Danach erfolgte der Import mit folgendem Befehl:
+```sql
+CREATE USER 'wpuser'@'%' IDENTIFIED BY '12344';
+GRANT ALL PRIVILEGES ON wp_m158.* TO 'wpuser'@'%';
+```
+<img width="664" alt="image" src="https://github.com/user-attachments/assets/5a1b9fc0-8ab2-4293-98a5-10a0ac77f9c7" />
 
-  ```bash
-  mysql -u wpuser -p wp_m158 < /home/ubuntu/wp_m158_db.sql
-  ```
-* Der Import war erfolgreich.
+### 3. Webserver & PHP:
 
-### WordPress-Dateien kopieren
+* Apache + PHP-FPM installiert:
 
-* Die alten WordPress-Dateien (HTML, PHP, wp-content usw.) wurden per FTP/SCP übertragen.
-* Dateien wurden nach `/var/www/html/` auf die Webserver-Instanz kopiert.
+```bash
+sudo apt install apache2 php php-fpm libapache2-mod-php mariadb-client
+```
 
-### Konfiguration
+* PHP über FPM eingebunden:
 
-* `wp-config.php` wurde angepasst:
+```bash
+sudo a2enmod proxy_fcgi setenvif
+sudo a2enconf php*-fpm
+sudo systemctl restart apache2
+```
 
-  * Datenbankname: `wp_m158`
-  * Benutzer: `wpuser`
-  * Passwort: `wpuser-passwort`
-  * DB-Host: IP der Datenbank-Instanz
+* Datei `php.info.php` unter `/var/www/html/` bereitgestellt zur Prüfung
 
-### Ergebnis
+![image](https://github.com/user-attachments/assets/6dc2277a-698f-4641-8588-adaaf22020f4)
 
-* Nach Abschluss war die Website unter der Public-IP des Webservers erreichbar.
-* Beispielanzeige: „Hello world!“ (Standard-Beitrag)
-* 
+### 🧩 4. WordPress:
+
+* WordPress-Dateien nach `/var/www/html/` kopiert
+* `wp-config.php` angepasst:
+
+```php
+define( 'DB_NAME', 'wp_m158' );
+define( 'DB_USER', 'wpuser' );
+define( 'DB_PASSWORD', '12344' );
+define( 'DB_HOST', '172.31.86.168' );
+```
+
+* HTTPS über self-signed Zertifikat aktiviert:
+
+```bash
+sudo a2enmod ssl
+sudo a2ensite default-ssl.conf
+sudo systemctl reload apache2
+```
 <img width="874" alt="wp config" src="https://github.com/user-attachments/assets/51ab356b-492a-4f90-ac67-fe52d87b70ac" />
 <img width="648" alt="worpress letzte config" src="https://github.com/user-attachments/assets/9104b0aa-b606-4275-ab52-e83ce5f4cc01" />
 <img width="947" alt="WORDPRESS POST" src="https://github.com/user-attachments/assets/7bd066b8-899a-460e-b3e6-61471a10328f" />
 <img width="948" alt="wordpress geht" src="https://github.com/user-attachments/assets/29278720-9873-48ee-a96f-600679c86014" />
+
+
+---
+## Phase 4 – Inbetriebnahme & Test
+
+### Getestet:
+
+* `https://<public-ip>` → lädt WordPress Startseite
+* Login über `/wp-admin`
+* Datenbankverbindung erfolgreich
+* php.info.php zeigt `FPM/FastCGI`
+
+### WordPress-Einstellungen:
+
+* Startseite auf statische Seite umgestellt
+* Beispielseite sichtbar
+
+### Screenshots erstellt von:
+
+* Webseite mit DNS
+* php.info.php
+* Apache/SSL-Status
+* wp-config.php
+``
 <img width="944" alt="WORDPRESS ANMELDEN" src="https://github.com/user-attachments/assets/9849788f-4b49-4dd4-b02a-9f86ac56b114" />
 <img width="946" alt="webserver erreichbar" src="https://github.com/user-attachments/assets/d7652162-bfd0-4222-a033-136aa801db9b" />
-
-
 ---
 
 ## Phase 4: Inbetriebnahme & Testing
@@ -144,7 +188,6 @@ PHP-FPM Integration mit Apache (Server API: FPM/FastCGI)
 ### ✅ Ziel
 Damit die Bewertung vollständig ist, musste PHP über **FPM/FastCGI** angebunden werden und nicht über das Standardmodul `apache2handler`.
 
-![image](https://github.com/user-attachments/assets/6dc2277a-698f-4641-8588-adaaf22020f4)
 
 ### PHP Health Check
 ![image](https://github.com/user-attachments/assets/68c1275e-4cac-46fb-a20c-1546ffb66533)
