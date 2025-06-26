@@ -32,6 +32,10 @@ Migration einer bestehenden WordPress-Website (ohne Plugins) von einem Quellserv
 * WordPress (neuste Version)
 * PhpMyAdmin
 * SCP für Dateiübertragungen
+
+Sicherheitsgruppe:
+![image](https://github.com/user-attachments/assets/f6efd238-e93c-41bb-9e4f-3f7072bcaa54)
+
 ---
 Phase 2: Backup & Export
 
@@ -82,6 +86,14 @@ In dieser Phase haben wir die alte WordPress-Seite auf die neue Zielumgebung üb
 
 * Nach Abschluss war die Website unter der Public-IP des Webservers erreichbar.
 * Beispielanzeige: „Hello world!“ (Standard-Beitrag)
+* 
+<img width="874" alt="wp config" src="https://github.com/user-attachments/assets/51ab356b-492a-4f90-ac67-fe52d87b70ac" />
+<img width="648" alt="worpress letzte config" src="https://github.com/user-attachments/assets/9104b0aa-b606-4275-ab52-e83ce5f4cc01" />
+<img width="947" alt="WORDPRESS POST" src="https://github.com/user-attachments/assets/7bd066b8-899a-460e-b3e6-61471a10328f" />
+<img width="948" alt="wordpress geht" src="https://github.com/user-attachments/assets/29278720-9873-48ee-a96f-600679c86014" />
+<img width="944" alt="WORDPRESS ANMELDEN" src="https://github.com/user-attachments/assets/9849788f-4b49-4dd4-b02a-9f86ac56b114" />
+<img width="946" alt="webserver erreichbar" src="https://github.com/user-attachments/assets/d7652162-bfd0-4222-a033-136aa801db9b" />
+
 
 ---
 
@@ -100,3 +112,4 @@ In dieser Phase wurde die migrierte WordPress-Seite auf der neuen Zielumgebung g
 ### Ergebnis:
 
 Die WordPress-Seite funktioniert wie auf dem Quellsystem. Keine Fehler aufgetreten. Die Migration war erfolgreich.
+<img width="738" alt="von web auf db zugreifen" src="https://github.com/user-attachments/assets/495d1783-19e2-46f9-b252-577abc208723" />
