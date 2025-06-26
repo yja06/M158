@@ -139,3 +139,11 @@ Da kein öffentlicher DNS verfügbar war, wurde der DNS-Name lokal über die `ho
 Hostdatei abgeändert
 ![image](https://github.com/user-attachments/assets/8fd453ab-175d-4e4b-aa8b-01448d6eecb3)
 
+PHP-FPM Integration mit Apache (Server API: FPM/FastCGI)
+
+### ✅ Ziel
+Damit die Bewertung vollständig ist, musste PHP über **FPM/FastCGI** angebunden werden und nicht über das Standardmodul `apache2handler`.
+
+![image](https://github.com/user-attachments/assets/6dc2277a-698f-4641-8588-adaaf22020f4)
+
+
