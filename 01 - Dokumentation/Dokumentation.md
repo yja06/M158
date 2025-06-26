@@ -113,3 +113,26 @@ In dieser Phase wurde die migrierte WordPress-Seite auf der neuen Zielumgebung g
 
 Die WordPress-Seite funktioniert wie auf dem Quellsystem. Keine Fehler aufgetreten. Die Migration war erfolgreich.
 <img width="738" alt="von web auf db zugreifen" src="https://github.com/user-attachments/assets/495d1783-19e2-46f9-b252-577abc208723" />
+
+# Phase 5 – Inbetriebnahme & DNS-Anbindung
+
+## ✅ Ziel dieser Phase
+
+- WordPress unter benutzerfreundlichem DNS-Namen erreichbar machen  
+- HTTPS aktivieren  
+- Funktion über DNS oder lokal simulieren  
+- Abschlusskontrolle und Test der Migration
+
+---
+
+## 🔧 1. DNS-Konfiguration (lokal via hosts-Datei)
+
+Da kein öffentlicher DNS verfügbar war, wurde der DNS-Name lokal über die `hosts`-Datei umgesetzt:
+
+```plaintext
+44.202.0.227    cms.yenulprojekt.ch
+```
+
+<img width="944" alt="https geht" src="https://github.com/user-attachments/assets/6efbdd6c-34bc-4f7e-9392-83dcd9d991a3" />
+<img width="959" alt="dns funktioniert" src="https://github.com/user-attachments/assets/f035d8db-8945-4daf-ab07-5902a36a7f30" />
+
