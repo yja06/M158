@@ -90,7 +90,7 @@ sudo systemctl restart apache2
 
 ![image](https://github.com/user-attachments/assets/6dc2277a-698f-4641-8588-adaaf22020f4)
 
-### 🧩 4. WordPress:
+### 4. WordPress:
 
 * WordPress-Dateien nach `/var/www/html/` kopiert
 * `wp-config.php` angepasst:
@@ -136,56 +136,73 @@ sudo systemctl reload apache2
 * php.info.php
 * Apache/SSL-Status
 * wp-config.php
+
 ``
-<img width="944" alt="WORDPRESS ANMELDEN" src="https://github.com/user-attachments/assets/9849788f-4b49-4dd4-b02a-9f86ac56b114" />
-<img width="946" alt="webserver erreichbar" src="https://github.com/user-attachments/assets/d7652162-bfd0-4222-a033-136aa801db9b" />
----
-
-## Phase 4: Inbetriebnahme & Testing
-
-In dieser Phase wurde die migrierte WordPress-Seite auf der neuen Zielumgebung getestet und in Betrieb genommen.
-
-### Schritte:
-
-- WordPress im Browser geöffnet (http://<webserver-ip>)
-- Admin-Login getestet mit Benutzer `wp_user`, Passwort `12344`
-- Verbindung zur Datenbank erfolgreich bestätigt
-- Inhalte (z. B. Beiträge, Seiten) auf korrekte Migration geprüft
-- Medieninhalte und Layout wurden auf Vollständigkeit überprüft
-
-### Ergebnis:
-
 Die WordPress-Seite funktioniert wie auf dem Quellsystem. Keine Fehler aufgetreten. Die Migration war erfolgreich.
 <img width="738" alt="von web auf db zugreifen" src="https://github.com/user-attachments/assets/495d1783-19e2-46f9-b252-577abc208723" />
 
-# Phase 5 – Inbetriebnahme & DNS-Anbindung
-
-## ✅ Ziel dieser Phase
-
-- WordPress unter benutzerfreundlichem DNS-Namen erreichbar machen  
-- HTTPS aktivieren  
-- Funktion über DNS oder lokal simulieren  
-- Abschlusskontrolle und Test der Migration
+---
+<img width="944" alt="WORDPRESS ANMELDEN" src="https://github.com/user-attachments/assets/9849788f-4b49-4dd4-b02a-9f86ac56b114" />
+<img width="946" alt="webserver erreichbar" src="https://github.com/user-attachments/assets/d7652162-bfd0-4222-a033-136aa801db9b" />
 
 ---
 
-## 🔧 1. DNS-Konfiguration (lokal via hosts-Datei)
+## Phase 5 – DNS & Abschluss
 
-Da kein öffentlicher DNS verfügbar war, wurde der DNS-Name lokal über die `hosts`-Datei umgesetzt:
+### DNS-Anbindung:
+
+* Da keine öffentliche Domain verfügbar war → `hosts`-Datei lokal verwendet
 
 ```plaintext
 44.202.0.227    cms.yenulprojekt.ch
 ```
+Hostdatei abgeändert
+![image](https://github.com/user-attachments/assets/8fd453ab-175d-4e4b-aa8b-01448d6eecb3)
+
+Pfad unter Windows:
+
+```
+C:\Windows\System32\drivers\etc\hosts
+```
+
+### SSL:
+
+* Selbstsigniertes Zertifikat aktiviert
+* Zugriff über `https://cms.yenulprojekt.ch` funktioniert
 
 <img width="944" alt="https geht" src="https://github.com/user-attachments/assets/6efbdd6c-34bc-4f7e-9392-83dcd9d991a3" />
 <img width="959" alt="dns funktioniert" src="https://github.com/user-attachments/assets/f035d8db-8945-4daf-ab07-5902a36a7f30" />
 
-Hostdatei abgeändert
-![image](https://github.com/user-attachments/assets/8fd453ab-175d-4e4b-aa8b-01448d6eecb3)
+### HTTP → HTTPS Redirect:
+
+* In `/etc/apache2/sites-available/000-default.conf`:
+
+```apache
+Redirect permanent / https://cms.yenulprojekt.ch/
+```
+
+Danach Apache neu geladen:
+
+```bash
+sudo systemctl reload apache2
+```
+
+### Tests:
+
+| Testfall                      | Ergebnis        |
+| ----------------------------- | --------------- |
+| Aufruf via DNS (`cms...`)     | ✅ Erfolgreich   |
+| HTTPS aktiv (SSL-Zertifikat)  | ✅ Mit Warnung   |
+| HTTP Redirect auf HTTPS       | ✅ Erfolgreich   |
+| Startseite sichtbar           | ✅ „Sample Page“ |
+| Login via `/wp-admin` möglich | ✅ Erfolgreich   |
+| Server API = FPM/FastCGI      | ✅ Ja            |
+
+---
 
 PHP-FPM Integration mit Apache (Server API: FPM/FastCGI)
 
-### ✅ Ziel
+### Ziel
 Damit die Bewertung vollständig ist, musste PHP über **FPM/FastCGI** angebunden werden und nicht über das Standardmodul `apache2handler`.
 
 
