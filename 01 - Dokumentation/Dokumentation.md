@@ -214,3 +214,7 @@ Damit die Bewertung vollständig ist, musste PHP über **FPM/FastCGI** angebunde
 ### PHP Health Check
 ![image](https://github.com/user-attachments/assets/0b4593db-fcbe-44ac-b2e2-af008a5872c4)
 
+
+Webseite Migration:
+![image](https://github.com/user-attachments/assets/443eb4d7-5a20-4133-ae9e-0fd1db32aac8)
+
