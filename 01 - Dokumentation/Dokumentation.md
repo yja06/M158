@@ -159,6 +159,9 @@ Die WordPress-Seite funktioniert wie auf dem Quellsystem. Keine Fehler aufgetret
 Hostdatei abgeändert
 ![image](https://github.com/user-attachments/assets/8fd453ab-175d-4e4b-aa8b-01448d6eecb3)
 
+Meine default.conf
+![image](https://github.com/user-attachments/assets/e6d06e31-227f-423f-9527-494f49dc6f46)
+
 Pfad unter Windows:
 
 ```
@@ -176,6 +179,8 @@ C:\Windows\System32\drivers\etc\hosts
 ### HTTP → HTTPS Redirect:
 
 * In `/etc/apache2/sites-available/000-default.conf`:
+* 
+![image](https://github.com/user-attachments/assets/9d7af0e5-ac0d-44d6-9ee8-5aeb972c9280)
 
 ```apache
 Redirect permanent / https://cms.yenulprojekt.ch/
