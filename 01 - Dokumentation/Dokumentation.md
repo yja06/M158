@@ -214,5 +214,3 @@ Damit die Bewertung vollständig ist, musste PHP über **FPM/FastCGI** angebunde
 ### PHP Health Check
 ![image](https://github.com/user-attachments/assets/0b4593db-fcbe-44ac-b2e2-af008a5872c4)
 
-
-
