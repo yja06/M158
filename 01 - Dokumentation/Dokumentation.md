@@ -218,3 +218,7 @@ Damit die Bewertung vollständig ist, musste PHP über **FPM/FastCGI** angebunde
 Webseite Migration:
 ![image](https://github.com/user-attachments/assets/443eb4d7-5a20-4133-ae9e-0fd1db32aac8)
 
+PHP funktioniert:
+![image](https://github.com/user-attachments/assets/bf4c3ca7-fe5b-4711-8505-36cd864fdc92)
+
+
