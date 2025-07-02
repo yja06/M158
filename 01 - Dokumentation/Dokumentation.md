@@ -10,6 +10,7 @@ Migration einer bestehenden WordPress-Website (ohne Plugins) von einem Quellserv
 * GitHub-Repository erstellt
 * Bewertungsraster analysiert
 * Quellumgebung: WordPress ohne Plugins, FTP-Zugang
+* Ich habe später im Projekt elasticIPs erstellt, weil die IPs im Verlaufe des Projektes immer geändert wurden, welches mich sehr störte.
 
 ---
 
@@ -120,7 +121,7 @@ sudo systemctl reload apache2
 
 ### Getestet:
 
-* `https://<public-ip>` → lädt WordPress Startseite
+* `https://54.166.7.177` → lädt WordPress Startseite
 * Login über `/wp-admin`
 * Datenbankverbindung erfolgreich
 * php.info.php zeigt `FPM/FastCGI`
