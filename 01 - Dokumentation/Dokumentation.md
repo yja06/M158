@@ -215,10 +215,10 @@ Damit die Bewertung vollständig ist, musste PHP über **FPM/FastCGI** angebunde
 ![image](https://github.com/user-attachments/assets/0b4593db-fcbe-44ac-b2e2-af008a5872c4)
 
 
-Webseite Migration:
+Webseite Migration funktioniert:
 ![image](https://github.com/user-attachments/assets/443eb4d7-5a20-4133-ae9e-0fd1db32aac8)
 
-PHP funktioniert:
+PhpMyAdmin funktioniert:
 ![image](https://github.com/user-attachments/assets/bf4c3ca7-fe5b-4711-8505-36cd864fdc92)
 
 
