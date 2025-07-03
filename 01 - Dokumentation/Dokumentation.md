@@ -230,6 +230,7 @@ Webseite Migration funktioniert:
 ---
 
 PhpMyAdmin funktioniert:
-![image](https://github.com/user-attachments/assets/bf4c3ca7-fe5b-4711-8505-36cd864fdc92)
+![image](https://github.com/user-attachments/assets/338ee652-4b8d-4906-ba57-6f12b9022d5e)
+![image](https://github.com/user-attachments/assets/3e376387-2028-4494-a17f-0705a9271238)
 
 
