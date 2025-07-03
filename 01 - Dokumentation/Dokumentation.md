@@ -168,6 +168,12 @@ Die WordPress-Seite funktioniert wie auf dem Quellsystem. Keine Fehler aufgetret
 
 ---
 
+## FTP Server
+
+![image](https://github.com/user-attachments/assets/2c55c3ba-7731-46fe-b871-615436a40fb0)
+
+---
+
 ## Phase 5 – DNS & Abschluss
 
 ### DNS-Anbindung:
