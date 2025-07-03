@@ -155,6 +155,8 @@ sudo systemctl reload apache2
 * Apache/SSL-Status
 * wp-config.php
 
+![image](https://github.com/user-attachments/assets/ee648415-a307-4de7-b702-489d3555ee16)
+
 ---
 
 Die WordPress-Seite funktioniert wie auf dem Quellsystem. Keine Fehler aufgetreten. Die Migration war erfolgreich.
