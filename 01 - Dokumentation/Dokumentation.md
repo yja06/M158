@@ -72,6 +72,22 @@ GRANT ALL PRIVILEGES ON wp_m158.* TO 'wpuser'@'%';
 
 <img width="664" alt="image" src="https://github.com/user-attachments/assets/5a1b9fc0-8ab2-4293-98a5-10a0ac77f9c7" />
 
+
+Mein User:
+![image](https://github.com/user-attachments/assets/62ae3a0f-ecc8-4cf3-b8c0-dfea38a86fde)
+
+---
+
+Userrechte:
+![image](https://github.com/user-attachments/assets/a8968d18-d681-4c68-89e5-09ddb1b73844)
+
+---
+
+root User:
+![image](https://github.com/user-attachments/assets/03d07953-af66-4f82-ab0d-82878cbaf34b)
+
+---
+
 ### 3. Webserver & PHP:
 
 * Apache + PHP-FPM installiert:
