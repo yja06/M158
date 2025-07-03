@@ -69,6 +69,7 @@ mysql -u root -p < wp_m158.sql
 CREATE USER 'wpuser'@'%' IDENTIFIED BY '12344';
 GRANT ALL PRIVILEGES ON wp_m158.* TO 'wpuser'@'%';
 ```
+
 <img width="664" alt="image" src="https://github.com/user-attachments/assets/5a1b9fc0-8ab2-4293-98a5-10a0ac77f9c7" />
 
 ### 3. Webserver & PHP:
@@ -138,7 +139,8 @@ sudo systemctl reload apache2
 * Apache/SSL-Status
 * wp-config.php
 
-``
+---
+
 Die WordPress-Seite funktioniert wie auf dem Quellsystem. Keine Fehler aufgetreten. Die Migration war erfolgreich.
 <img width="738" alt="von web auf db zugreifen" src="https://github.com/user-attachments/assets/495d1783-19e2-46f9-b252-577abc208723" />
 
@@ -168,6 +170,11 @@ Pfad unter Windows:
 ```
 C:\Windows\System32\drivers\etc\hosts
 ```
+
+Meine wp-config.php
+![image](https://github.com/user-attachments/assets/b2762183-816b-4a20-9f04-a52747548a83)
+
+---
 
 ### SSL:
 
