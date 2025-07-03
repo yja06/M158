@@ -1,4 +1,4 @@
-![image](https://github.com/user-attachments/assets/5ac16d57-0c40-4efc-8710-e79455401a55)## Phase 1 – Projektstart
+## Phase 1 – Projektstart
 
 ### Ziel des Projekts
 
@@ -211,10 +211,12 @@ PHP-FPM Integration mit Apache (Server API: FPM/FastCGI)
 ### Ziel
 Damit die Bewertung vollständig ist, musste PHP über **FPM/FastCGI** angebunden werden und nicht über das Standardmodul `apache2handler`.
 
+---
 
 ### PHP Health Check
-![image](https://github.com/user-attachments/assets/0b4593db-fcbe-44ac-b2e2-af008a5872c4)
+![image](https://github.com/user-attachments/assets/bd505873-5b26-4c44-83c5-36759a0a33ca)
 
+---
 
 Webseite Migration funktioniert:
 ![image](https://github.com/user-attachments/assets/443eb4d7-5a20-4133-ae9e-0fd1db32aac8)
@@ -223,7 +225,9 @@ Webseite Migration funktioniert:
 ![image](https://github.com/user-attachments/assets/d3b4d80e-1004-4b9d-8a9c-6731de49892d)
 ![image](https://github.com/user-attachments/assets/01978611-64dd-4546-a7ee-0525144a5be0)
 ![image](https://github.com/user-attachments/assets/78e604b9-0935-47e8-9aa9-6be53dd767f2)
+![image](https://github.com/user-attachments/assets/5ac16d57-0c40-4efc-8710-e79455401a55)
 
+---
 
 PhpMyAdmin funktioniert:
 ![image](https://github.com/user-attachments/assets/bf4c3ca7-fe5b-4711-8505-36cd864fdc92)
